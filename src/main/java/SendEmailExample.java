@@ -34,7 +34,6 @@ public class SendEmailExample {
         	title = scan.nextLine();
 			System.out.println("내용을 입력하시오: ");
 			content = scan.nextLine();
-			System.out.println(content);
     		System.out.println("전송하시겠습니까?(Y:전송 N:다시입력):");
     		yesorno = scan.next();
     		if(yesorno.equalsIgnoreCase("Y")) {
@@ -68,7 +67,7 @@ public class SendEmailExample {
 
 
 
-            message.setContent(content, "text/html");
+            message.setContent(content, "text/html;charset=UTF-8");
 
             Transport.send(message);
 
