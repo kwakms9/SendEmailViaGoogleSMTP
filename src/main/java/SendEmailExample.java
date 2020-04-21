@@ -16,8 +16,8 @@ public class SendEmailExample {
         String username;
         String password;
         String receiver;
-        String title;
-        String content;
+        String title = null;
+        String content = null;
         String yesorno;
         
         
@@ -25,21 +25,22 @@ public class SendEmailExample {
         username = scan.next();
         System.out.println("비밀번호를 입력하시오: ");
         password = scan.next();
+        clearScreen();
         System.out.println("보낼사람의 이메일 주소를 입력하시오: ");
         receiver = scan.next();
-        
+        scan.nextLine();
         while(true) {
-        	if(true) {
-        		System.out.println("제목을 입력하시오: ");
-        		title = scan.nextLine();
-        		System.out.println("내용을 입력하시오: ");
-        		content = scan.nextLine();
-        		System.out.println("전송하시겠습니까?(Y:전송 N:다시입력):");
-        		yesorno = scan.next();
-        		if(yesorno.equalsIgnoreCase("Y")) {
-        			break;
-        		}
-        	}
+        	System.out.println("제목을 입력하시오: ");
+        	title = scan.nextLine();
+			System.out.println("내용을 입력하시오: ");
+			content = scan.nextLine();
+			System.out.println(content);
+    		System.out.println("전송하시겠습니까?(Y:전송 N:다시입력):");
+    		yesorno = scan.next();
+    		if(yesorno.equalsIgnoreCase("Y")) {
+    			System.out.println("메일 전송중...");
+    			break;
+    		}
         }
         
         try{
@@ -77,4 +78,8 @@ public class SendEmailExample {
             e.printStackTrace();
         }
     }
+    public static void clearScreen() {
+        for (int i = 0; i < 80; i++)
+          System.out.println("");
+      }
 }
