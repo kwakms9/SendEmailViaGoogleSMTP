@@ -16,7 +16,9 @@ public class SendEmailExample {
 
             final String username = "your gmail";
             final String password = "your gmail credential";
-
+            String receiver = "receiver email adress";
+            
+            
             Properties prop = new Properties();
             prop.put("mail.smtp.host", "smtp.gmail.com");
             prop.put("mail.smtp.port", "587");
@@ -34,7 +36,7 @@ public class SendEmailExample {
             message.setFrom(new InternetAddress("NotUsed@gmail.com"));
             message.setRecipients(
                     Message.RecipientType.BCC,
-                    InternetAddress.parse("someone@gmail.com")
+                    InternetAddress.parse(receiver)
             );
             message.setSubject("Your email title");
 
