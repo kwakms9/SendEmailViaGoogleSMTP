@@ -10,19 +10,12 @@ import java.util.*;
 /**
  * @author yuchlin on 3/21/20
  */
-public class SendEmailExample { //뒤로가기를 전체 메소드들 마다 if문을 두고 변수로 감지되면 모두 리턴되도록 하는 것 예상해보기
+public class SendEmailExample { 
     private String username = null; // null 이면 logout 상태
     private String password = null;
-    //String receiver;
-    //String title = "";
-   // String content = "";
     String yesorno;
 	Scanner scan = new Scanner(System.in);
-	boolean success = false;
-    SendEmailExample(){
-    }
-    
-	
+	boolean success = false;  
 	
     public static void clearScreen() {
         for (int i = 0; i < 80; i++)
@@ -33,11 +26,11 @@ public class SendEmailExample { //뒤로가기를 전체 메소드들 마다 if문을 두고 변수
 	        System.out.println("사용하실 옵션을 선택해 주십시오.");
 	        System.out.println("=========================");
 	        System.out.println("---메일작성 후 전송직전 로그인가능---");
-	        System.out.println("1.로그인");
+	        if(username==null) { System.out.println("1.로그인"); }
+	        else { System.out.println("다른계정으로 로그인"); }
 	        System.out.println("2.메일 작성");
-	        System.out.println("3.메일 다중전송");
-	        System.out.println("4.로그아웃");
-	        System.out.println("5.종료");
+	        System.out.println("3.로그아웃");
+	        System.out.println("4.종료");
 	        System.out.println("========================="); 
 	        System.out.printf("입력: ");
 	        
@@ -86,7 +79,7 @@ public class SendEmailExample { //뒤로가기를 전체 메소드들 마다 if문을 두고 변수
     }
     public void tryLogin() {
     	String receiver;
-    	receiver = "test@nonononononono.test";	//없는 이메일
+    	receiver = "test@lagsixtome.com";	//없는 이메일
     	//System.out.println(username+password);
     	sender(receiver,"","");
     	
@@ -135,6 +128,33 @@ public class SendEmailExample { //뒤로가기를 전체 메소드들 마다 if문을 두고 변수
         }
     }
     	
+    public void writeMessage() {
+    	String title;
+    	String content;
+    	while(true) {
+	    	System.out.printf("보낼사람의 이메일 주소를 입력하십시오.\n: ");
+	    	String receiver [] = scan.nextLine().replace(" ", "").split(","); //이메일 주소들 입력
+	    	
+	    	System.out.printf("메일의 제목을 입력하십시오.\n: ");
+	    	title = scan.nextLine();
+	    	System.out.println("내용을 입력하시오.\n: ");
+			content = scan.nextLine();
+			System.out.println("전송하시겠습니까?(Y:전송 N:취소):");
+			yesorno = scan.next();
+			if(yesorno.equalsIgnoreCase("Y") || yesorno.contentEquals("전송")) {
+				System.out.println("메일 전송중...");
+				for(int i=0;i<receiver.length;i++) {
+					sender(receiver[i],title,content);
+				}
+				System.out.println("모든 메일을 발송하였습니다. 더 보내시겠습니까?(Y:전송 N:돌아가기)");
+				yesorno = scan.next();
+				if(!(yesorno.equalsIgnoreCase("Y") || yesorno.contentEquals("전송"))) { break; }
+				
+			}else {
+				System.out.println("메일 전송이 중단되었습니다. 처음으로 이동");
+			}
+    	}
+    }
     public static void main(String[] args){ 
     	SendEmailExample mail = new SendEmailExample();
     	Scanner scan = new Scanner(System.in);
@@ -153,16 +173,13 @@ public class SendEmailExample { //뒤로가기를 전체 메소드들 마다 if문을 두고 변수
 	        		mail.login();
 	        		break;
 	        	case 2:
-	        		
+	        		mail.writeMessage();
 	        		break;
 	        	case 3:
-	        		break;
-	        	case 4:
 	        		mail.logout();
 	        		break;
-	        	case 5:
-	        		act=false;
-	        		break;
+	        	case 4:
+	        		return;
 	        	default:
 	        		System.out.println("잘못입력하였습니다.");
 	                        	
