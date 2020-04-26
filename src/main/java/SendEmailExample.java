@@ -53,8 +53,13 @@ public class SendEmailExample {
     }
     
     public void logout() {
-    	username = null;
-    	password = null;
+    	if(username!=null) {
+    		username = null;
+    		password = null;
+    	}else {
+    		System.out.println("현재 로그아웃 상태입니다.");
+    		System.out.println("");
+    	}
     }
     
     public String checkId() {
@@ -111,8 +116,6 @@ public class SendEmailExample {
             );
             message.setSubject(title);
 
-
-
             message.setContent(content, "text/html;charset=UTF-8");
 
             Transport.send(message);
@@ -121,7 +124,7 @@ public class SendEmailExample {
             success = true;
 
         } catch (AuthenticationFailedException e) {
-        	System.out.println("로그인 실패!\n 아이디와 비밀번호를 다시 확인해 보십시오.");
+        	System.out.println("로그인 실패!\n아이디와 비밀번호를 다시 확인해 보십시오.");
         	success = false;
             //e.printStackTrace();
         } catch(Exception e) {
@@ -129,32 +132,38 @@ public class SendEmailExample {
         	success = false;
         }
     }
-    	
+
     public void writeMessage() {
     	String title;
     	String content;
-    	while(true) {
-	    	System.out.printf("보낼사람의 이메일 주소를 입력하십시오.\n: ");
-	    	String receiver [] = scan.nextLine().replace(" ", "").split(","); //이메일 주소들 입력
-	    	
-	    	System.out.printf("메일의 제목을 입력하십시오.\n: ");
-	    	title = scan.nextLine();
-	    	System.out.println("내용을 입력하시오.\n: ");
-			content = scan.nextLine();
-			System.out.println("전송하시겠습니까?(Y:전송 N:취소):");
-			yesorno = scan.next();
-			if(yesorno.equalsIgnoreCase("Y") || yesorno.contentEquals("전송")) {
-				System.out.println("메일 전송중...");
-				for(int i=0;i<receiver.length;i++) {
-					sender(receiver[i],title,content);
-				}
-				System.out.println("모든 메일을 발송하였습니다. 더 보내시겠습니까?(Y:전송 N:돌아가기)");
+    	
+    	if(username!=null) {
+	    	while(true) {
+		    	System.out.printf("보낼사람의 이메일 주소를 입력하십시오.\n: ");
+		    	String receiver [] = scan.nextLine().replace(" ", "").split(","); //이메일 주소들 입력
+		    	
+		    	System.out.printf("메일의 제목을 입력하십시오.\n: ");
+		    	title = scan.nextLine();
+		    	System.out.println("내용을 입력하시오.\n: ");
+				content = scan.nextLine();
+				System.out.println("전송하시겠습니까?(Y:전송 N:취소):");
 				yesorno = scan.next();
-				if(!(yesorno.equalsIgnoreCase("Y") || yesorno.contentEquals("전송"))) { break; }
-				
-			}else {
-				System.out.println("메일 전송이 중단되었습니다. 처음으로 이동");
-			}
+				if(yesorno.equalsIgnoreCase("Y") || yesorno.contentEquals("전송")) {
+					System.out.println("메일 전송중...");
+					for(int i=0;i<receiver.length;i++) {
+						sender(receiver[i],title,content);
+					}
+					System.out.println("모든 메일을 발송하였습니다. 더 보내시겠습니까?(Y:전송 N:돌아가기)");
+					yesorno = scan.next();
+					if(!(yesorno.equalsIgnoreCase("Y") || yesorno.contentEquals("전송"))) { break; }
+					
+				}else {
+					System.out.println("메일 전송이 중단되었습니다. 처음으로 이동");
+				}
+	    	}
+    	}else {
+    		System.out.println("현재 로그인 상태가 아닙니다.");
+    		System.out.println("");
     	}
     }
     public static void main(String[] args){ 
