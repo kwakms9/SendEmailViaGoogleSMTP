@@ -119,7 +119,7 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
 
    public static void main(String[] args) {
       // TODO Auto-generated method stub
-	   if(true) { //콘솔모드
+	   if(args[0].equalsIgnoreCase("c") || args[0].equalsIgnoreCase("console")) { //콘솔모드
 		   SendEmailExample mail = new SendEmailExample();
 	    	Scanner scan = new Scanner(System.in);
 	        String select;
