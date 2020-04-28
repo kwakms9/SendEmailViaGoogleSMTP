@@ -14,12 +14,13 @@ public class SendEmailExample {
     String yesorno;
 	Scanner scan = new Scanner(System.in);
 	boolean success = false;
+	boolean guimode = false;
     SendEmailExample(){
     }
     
 	
 	
-    public static void clearScreen() {
+    public void clearScreen() {
         for (int i = 0; i < 80; i++)
           System.out.println("");
       }
@@ -28,7 +29,7 @@ public class SendEmailExample {
 	        System.out.println("사용하실 옵션을 선택해 주십시오.");
 	        System.out.println("=========================");
 	        if(username==null) { System.out.println("1.로그인"); }
-	        else { System.out.println("다른계정으로 로그인"); }
+	        else { System.out.println("1.다른계정으로 로그인"); }
 	        System.out.println("2.메일 작성");
 	        System.out.println("3.로그아웃");
 	        System.out.println("4.종료");
@@ -39,17 +40,43 @@ public class SendEmailExample {
     public void login() {
     	do {
     		username=checkId();
-	    	System.out.printf("비밀번호를 입력하시오: ");
-	    	password = scan.next();
-	    	clearScreen();	//화면 올리기
+    		if(guimode==false) {
+		    	System.out.printf("비밀번호를 입력하시오: ");
+		    	password = scan.next();
+		    	clearScreen();	//화면 올리기
+    		}
 	    	tryLogin();
-	    	if(success = true) {
+	    	if(success == true) {
 	    		break;
 	    	}
-    	}while(true);
+    	}while(!guimode);
     }
     
-    public void logout() {
+    public String getUsername() {
+		return username;
+	}
+
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
+	public void logout() {
     	if(username!=null) {
     		username = null;
     		password = null;
@@ -62,9 +89,11 @@ public class SendEmailExample {
     public String checkId() {
     	String tmp[] = new String[2];
     	
-    	while(true) {
-    		System.out.printf("구글 이메일을 입력하시오: ");
-        	username = scan.next();
+    	do {
+    		if(guimode==false) {
+    			System.out.printf("구글 이메일을 입력하시오: ");
+    			username = scan.next();
+    			}
         	
         	if(!username.contains("@")) {
         		username= username+"@gmail.com";
@@ -78,7 +107,7 @@ public class SendEmailExample {
 	    		System.out.println("사용할 수 없는 이메일주소입니다.");
 	    		System.out.println("입력된 포털주소: "+tmp[1]);
 	    	}
-    	}
+    	}while(!guimode);
     	return username;
     }
     public void tryLogin() {
@@ -86,6 +115,9 @@ public class SendEmailExample {
     	receiver = "test@lagsixtome.com";	//없는 이메일
     	//System.out.println(username+password);
     	sender(receiver,"","");
+    	if(success) {
+    		System.out.println("로그인 성공");
+    	}
     	
     }
     
@@ -117,7 +149,7 @@ public class SendEmailExample {
 
             Transport.send(message);
 
-            System.out.println("Email sent.");
+            //System.out.println("Email sent.");
             success = true;
 
         } catch (AuthenticationFailedException e) {
@@ -137,6 +169,7 @@ public class SendEmailExample {
     	if(username!=null) {
 	    	while(true) {
 		    	System.out.printf("보낼사람의 이메일 주소를 입력하십시오.\n: ");
+		    	scan.nextLine();
 		    	String receiver [] = scan.nextLine().replace(" ", "").split(","); //이메일 주소들 입력
 		    	
 		    	System.out.printf("메일의 제목을 입력하십시오.\n: ");
@@ -148,6 +181,7 @@ public class SendEmailExample {
 				if(yesorno.equalsIgnoreCase("Y") || yesorno.contentEquals("전송")) {
 					System.out.println("메일 전송중...");
 					for(int i=0;i<receiver.length;i++) {
+						System.out.println(receiver[i]);
 						sender(receiver[i],title,content);
 					}
 					System.out.println("모든 메일을 발송하였습니다. 더 보내시겠습니까?(Y:전송 N:돌아가기)");
@@ -163,7 +197,23 @@ public class SendEmailExample {
     		System.out.println("");
     	}
     }
-    public static void main(String[] args){ 
+    
+    public String guiMessage(String receiverarry, String title, String content) {
+    	String errreceiver="";
+    	String receiver [] = receiverarry.replace(" ", "").split(","); //이메일 주소들 입력
+		System.out.println("메일 전송중...");
+		
+		for(int i=0;i<receiver.length;i++) {
+			sender(receiver[i],title,content);	//전송
+			if(success==false) {
+				errreceiver+=receiver[i]+" ";
+			}
+		}
+	    	return errreceiver;
+    }
+    
+    
+   /* public static void main(String[] args){ 
     	SendEmailExample mail = new SendEmailExample();
     	Scanner scan = new Scanner(System.in);
         String select;
@@ -193,5 +243,5 @@ public class SendEmailExample {
 	                        	
 	        }
         }
-    }
+    }*/
 }
