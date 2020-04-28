@@ -95,7 +95,6 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
 	    	 mail.guimode=true;
 	    	 mail.setUsername(usernameText.getText());
 	    	 mail.setPassword(passwordText.getText());
-	    	 //System.out.println(mail.getUsername()+mail.getPassword());
 	    	 
 	    	 if(usernameText.getText().equals("")) {	//로그인 조건 검사
 	    		 JOptionPane.showMessageDialog(null, "이메일을 입력하세요.");
@@ -119,6 +118,7 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
 
    public static void main(String[] args) {
       // TODO Auto-generated method stub
+	   try {
 	   if(args[0].equalsIgnoreCase("c") || args[0].equalsIgnoreCase("console")) { //콘솔모드
 		   SendEmailExample mail = new SendEmailExample();
 	    	Scanner scan = new Scanner(System.in);
@@ -151,6 +151,8 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
 	   }else {
 		   new LoginFrame();	//GUI모드
 		   }
+	   }catch(Exception e) {
+		   new LoginFrame();
 	   }
-
+   }
 }

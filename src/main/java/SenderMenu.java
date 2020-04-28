@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 public class SenderMenu extends JFrame implements ActionListener {
 	SendEmailExample mail;
-		JPanel panel = new JPanel(null);
+		JPanel panel = new JPanel();
 		JButton helpbt = new JButton("도움말");
 		JButton comfirmLogin = new JButton("현재 계정확인");
 		JButton sendbt = new JButton("메일 작성");
@@ -41,6 +41,7 @@ public class SenderMenu extends JFrame implements ActionListener {
 	    sendbt.addActionListener(this);
 	    logoutbt.addActionListener(this);
 	    exitbt.addActionListener(this);
+	    this.setTitle("Google Email sender");
 	    
 	    
 	}
@@ -105,6 +106,7 @@ public class SenderMenu extends JFrame implements ActionListener {
 			this.setSize(500, 500);
 			this.setLocationRelativeTo(null);
 		    this.setVisible(true);
+		    this.setTitle("Google Email sender");
 		}
 
 		@Override
@@ -116,6 +118,7 @@ public class SenderMenu extends JFrame implements ActionListener {
 					 JOptionPane.showMessageDialog(null, "메일 전송완료!\n 미전달: "+err);
 				}else {
 					 JOptionPane.showMessageDialog(null, "메일 전송완료!");
+					 dispose();
 				}
 			}
 			
