@@ -7,10 +7,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.*;
 
-/**
- * @author yuchlin on 3/21/20
- */
-public class SendEmailExample { 
+
+public class SendEmailExample {
     private String username = null; // null 이면 logout 상태
     private String password = null;
     String yesorno;
@@ -29,7 +27,6 @@ public class SendEmailExample {
     public void menu() {
 	        System.out.println("사용하실 옵션을 선택해 주십시오.");
 	        System.out.println("=========================");
-	        System.out.println("---메일작성 후 전송직전 로그인가능---");
 	        if(username==null) { System.out.println("1.로그인"); }
 	        else { System.out.println("다른계정으로 로그인"); }
 	        System.out.println("2.메일 작성");
