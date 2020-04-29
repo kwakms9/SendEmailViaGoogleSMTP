@@ -113,7 +113,6 @@ public class SendEmailExample {
     public void tryLogin() {
     	String receiver;
     	receiver = "test@lagsixtome.com";	//없는 이메일
-    	//System.out.println(username+password);
     	sender(receiver,"","");
     	if(success) {
     		System.out.println("로그인 성공");
@@ -211,37 +210,4 @@ public class SendEmailExample {
 		}
 	    	return errreceiver;
     }
-    
-    
-   /* public static void main(String[] args){ 
-    	SendEmailExample mail = new SendEmailExample();
-    	Scanner scan = new Scanner(System.in);
-        String select;
-        boolean act = true;
-        
-        while(act) {
-	        mail.menu();	//메뉴 출력
-	    	select = scan.next();    
-	    	
-	    	try {	Integer.parseInt(select);	}	//숫자 아닌값 확인
-	    	catch(Exception e){ select = "0"; }
-	    	
-	        switch(Integer.parseInt(select)) {
-	        	case 1:
-	        		mail.login();
-	        		break;
-	        	case 2:
-	        		mail.writeMessage();
-	        		break;
-	        	case 3:
-	        		mail.logout();
-	        		break;
-	        	case 4:
-	        		return;
-	        	default:
-	        		System.out.println("잘못입력하였습니다.");
-	                        	
-	        }
-        }
-    }*/
 }

@@ -26,12 +26,8 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
    boolean trylogin =false;
 
    public LoginFrame() {
-
-     // login.setPreferredSize(new Dimension(500, 25));
       JLabel label1 = new JLabel("이메일");
       JLabel label2 = new JLabel("비밀번호");
-      //stateMessage.setEditable(false);
-      //stateMessage.setBackground(Color.gray);
       
       panel.add(label1);
       panel.add(usernameText);
@@ -39,7 +35,6 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
       panel.add(passwordText);
 
       this.setLayout(new BorderLayout());
-      //setSize(500, 200);
       this.setResizable(false);
       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       this.setVisible(true);

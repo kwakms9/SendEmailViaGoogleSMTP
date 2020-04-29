@@ -85,7 +85,6 @@ public class SenderMenu extends JFrame implements ActionListener {
 			
 			
 			receiver.setSize(10, 10);
-			//scrollPane.setVerticalScrollBarPolicy(scrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 			contentlabel.setVerticalTextPosition(JLabel.CENTER);
 			contentText.setLineWrap(true);
 			panel1.add(receiver);
